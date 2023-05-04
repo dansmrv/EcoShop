@@ -1,0 +1,23 @@
+<div *ngIf="product" class="product-page">
+    <div class="product-images">
+      <app-product-image [images]="product.images"></app-product-image>
+    </div>
+    <div class="product-about">
+      <h1 class="product-name product-about-item">{{product.name}}</h1>
+      <h2 [routerLink]="['/', 'categories', product.category.id]" class="product-category-name  product-about-item">Категория:
+          {{product.category.name}}
+      </h2>
+      <h3 *ngIf="product.description.length" class="product-about-item">About: {{product.description}}</h3>
+      <h2 class="product-about-item">Price: {{product.price}}тг</h2>
+      <div class="product-to-cart  product-about-item" *ngIf="product.in_stock">
+        <div class="product-number">
+          <input type="number" min="1" max="99" class="product-count" [(ngModel)]="product.quantity">
+          <h1 class="product-count-text">Cnt.</h1>
+        </div>
+        <button class="product-cart-btn" (click)="toCart(product)">To cart</button>
+      </div>
+
+      <h2 class="product-about-item product-not-available" *ngIf="!product.in_stock">Not in stock</h2>
+
+    </div>
+  </div>
